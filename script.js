@@ -50,6 +50,9 @@ function playBeep() {
     if (beep) {
         beep.currentTime = 0;
         beep.play();
+        console.log('Beep sound played');
+    } else {
+        console.log('Beep sound element not found');
     }
 }
 
