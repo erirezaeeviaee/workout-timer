@@ -145,4 +145,6 @@ function startWorkout() {
 
     // Start the timer
     startTimer();
-} 
+}
+
+document.getElementById('beep-sound').play() 
