@@ -38,6 +38,7 @@ function updateStatus() {
     const status = document.getElementById('status');
     if (currentExercise >= totalExercises) {
         status.textContent = 'Workout Complete!';
+        document.getElementById('progress-bar').style.width = '100%';
         return;
     }
     status.textContent = isResting ? 
