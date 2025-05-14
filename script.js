@@ -45,6 +45,43 @@ function updateStatus() {
         `Exercise ${currentExercise + 1} of ${totalExercises}`;
 }
 
+function playBeep() {
+    const beep = document.getElementById('beep-sound');
+    if (beep) {
+        beep.currentTime = 0;
+        beep.play();
+    }
+}
+
+function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('dark');
+    // Change icon
+    const btn = document.getElementById('theme-toggle');
+    if (body.classList.contains('dark')) {
+        btn.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        btn.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+function setInitialTheme() {
+    const theme = localStorage.getItem('theme');
+    const body = document.body;
+    const btn = document.getElementById('theme-toggle');
+    if (theme === 'dark') {
+        body.classList.add('dark');
+        btn.textContent = '☀️';
+    } else {
+        body.classList.remove('dark');
+        btn.textContent = '🌙';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setInitialTheme);
+
 function startTimer() {
     const timerDisplay = document.getElementById('timer');
     timerDisplay.textContent = formatTime(timeLeft);
@@ -55,6 +92,7 @@ function startTimer() {
 
         if (timeLeft <= 0) {
             clearInterval(timer);
+            playBeep();
             if (isResting) {
                 currentExercise++;
                 if (currentExercise >= totalExercises) {

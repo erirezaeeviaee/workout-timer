@@ -20,6 +20,11 @@
             background-color: #f5f5f5;
         }
 
+        body.dark {
+            background-color: #181818;
+            color: #f5f5f5;
+        }
+
         .container {
             background-color: white;
             padding: 15px;
@@ -28,6 +33,12 @@
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        .dark .container {
+            background-color: #232323;
+            color: #f5f5f5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         h1 {
@@ -55,6 +66,12 @@
             font-size: clamp(16px, 4vw, 18px);
         }
 
+        .dark input {
+            background-color: #181818;
+            color: #f5f5f5;
+            border: 1px solid #444;
+        }
+
         button {
             background-color: #4CAF50;
             color: white;
@@ -72,10 +89,19 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        .dark button {
+            background-color: #333;
+            color: #f5f5f5;
+        }
+
         button:hover {
             background-color: #45a049;
             transform: scale(1.05);
             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .dark button:hover {
+            background-color: #444;
         }
 
         button:active {
@@ -106,11 +132,19 @@
             margin: 20px 0;
         }
 
+        .dark #progress {
+            background-color: #333;
+        }
+
         #progress-bar {
             width: 0%;
             height: 100%;
             background-color: #4CAF50;
             transition: width 1s linear;
+        }
+
+        .dark #progress-bar {
+            background-color: #00b894;
         }
 
         .page {
@@ -162,9 +196,26 @@
             user-select: none;
             -webkit-user-select: none;
         }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        body.dark #theme-toggle {
+            color: #f5f5f5;
+        }
     </style>
 </head>
 <body>
+    <div style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
+        <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </div>
+    <audio id="beep-sound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfa1c82.mp3" preload="auto"></audio>
     <!-- Settings Page -->
     <div id="settings-page" class="page active">
         <div class="container">
