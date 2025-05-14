@@ -125,6 +125,8 @@ function startWorkout() {
         return;
     }
 
+    playBeep(); // Play beep when workout starts
+
     // Reset state
     currentExercise = 0;
     isResting = false;
