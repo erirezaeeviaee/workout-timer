@@ -101,16 +101,17 @@ function startTimer() {
                 currentExercise++;
                 if (currentExercise >= totalExercises) {
                     updateStatus();
+                    updateProgress();
                     return;
                 }
                 isResting = false;
                 timeLeft = exerciseDuration;
+                updateProgress();
             } else {
                 isResting = true;
                 timeLeft = restDuration;
             }
             updateStatus();
-            updateProgress();
             startTimer();
         }
     }, 1000);
