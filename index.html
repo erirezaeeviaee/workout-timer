@@ -4,238 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout Timer</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        :root {
+            --primary: #2ec4b6;
+            --primary-dark: #1b9c8b;
+            --accent: #3a86ff;
+            --bg: #f8fafc;
+            --card-bg: #fff;
+            --text: #222;
+            --text-light: #666;
+            --shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+            --radius: 18px;
+            --transition: 0.2s cubic-bezier(.4,0,.2,1);
         }
-
         body {
-            font-family: Arial, sans-serif;
-            width: 100%;
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
-            background-color: #f5f5f5;
-        }
-
-        body.dark {
-            background-color: #181818;
-            color: #f5f5f5;
-        }
-
-        .container {
-            background-color: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .dark .container {
-            background-color: #232323;
-            color: #f5f5f5;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-
-        h1 {
-            font-size: clamp(24px, 5vw, 32px);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: clamp(16px, 4vw, 18px);
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: clamp(16px, 4vw, 18px);
-        }
-
-        .dark input {
-            background-color: #181818;
-            color: #f5f5f5;
-            border: 1px solid #444;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            width: min(150px, 40vw);
-            height: min(150px, 40vw);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: clamp(18px, 4vw, 24px);
-            font-weight: bold;
-            display: block;
-            margin: 30px auto;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .dark button {
-            background-color: #333;
-            color: #f5f5f5;
-        }
-
-        button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-        }
-
-        .dark button:hover {
-            background-color: #444;
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        #timer {
-            font-size: clamp(36px, 15vw, 72px);
-            text-align: center;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        #status {
-            text-align: center;
-            font-size: clamp(18px, 4vw, 24px);
-            margin: 10px 0;
-            color: #333;
-            padding: 0 10px;
-        }
-
-        #progress {
-            width: 100%;
-            height: 20px;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        .dark #progress {
-            background-color: #333;
-        }
-
-        #progress-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #4CAF50;
-            transition: width 1s linear;
-        }
-
-        .dark #progress-bar {
-            background-color: #00b894;
-        }
-
-        .page {
-            display: none;
-            width: 100%;
-            min-height: 100vh;
-            padding: 10px;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .back-button {
-            width: auto;
-            height: auto;
-            padding: 12px 24px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: clamp(16px, 4vw, 18px);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-
-            .form-group {
-                margin-bottom: 12px;
-            }
-
-            input {
-                padding: 10px;
-            }
-
-            button {
-                margin: 20px auto;
-            }
+        .container {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
-
-        /* Prevent text selection during workout */
-        .page.active {
-            user-select: none;
-            -webkit-user-select: none;
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
         }
-
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        label {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        input[type="number"] {
+            padding: 0.75rem 1rem;
+            border: 1.5px solid #e0e0e0;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            outline: none;
+            transition: border var(--transition);
+        }
+        input[type="number"]:focus {
+            border-color: var(--primary);
+        }
+        button {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+            transition: background var(--transition), transform var(--transition);
+        }
+        button:hover, button:focus {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transform: translateY(-2px) scale(1.03);
+        }
+        .back-button {
+            background: none;
+            color: var(--primary-dark);
+            border: none;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            align-self: flex-start;
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+        .back-button:hover {
+            color: var(--accent);
+        }
+        #timer {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin: 0.5rem 0 0.2rem 0;
+        }
+        #status {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        #progress {
+            width: 100%;
+            height: 14px;
+            background: #e0e0e0;
+            border-radius: 7px;
+            overflow: hidden;
+            margin: 1.2rem 0 0.5rem 0;
+        }
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.7s var(--transition);
+        }
         #theme-toggle {
             background: none;
             border: none;
-            font-size: 2rem;
+            font-size: 1.7rem;
             cursor: pointer;
-            color: #333;
-            transition: color 0.3s;
+            color: var(--primary-dark);
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            z-index: 10;
+            transition: color var(--transition);
         }
-
-        body.dark #theme-toggle {
+        #theme-toggle:hover {
+            color: var(--accent);
+        }
+        /* Dark mode */
+        body.dark {
+            background: #181c1f;
             color: #f5f5f5;
+        }
+        body.dark .container {
+            background: #23272b;
+            color: #f5f5f5;
+        }
+        body.dark #status {
+            color: var(--primary);
+        }
+        body.dark #theme-toggle {
+            color: #fff;
+        }
+        body.dark input[type="number"] {
+            background: #23272b;
+            color: #f5f5f5;
+            border: 1.5px solid #333;
+        }
+        body.dark #progress {
+            background: #333;
+        }
+        @media (max-width: 500px) {
+            .container {
+                padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+                max-width: 98vw;
+            }
+            #timer {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
-        <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
-    </div>
-    <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+    <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <audio id="beep-sound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfa1c82.mp3" preload="auto"></audio>
     <!-- Settings Page -->
     <div id="settings-page" class="page active">
         <div class="container">
-            <h1>Workout Settings</h1>
+            <h1>Workout Timer</h1>
             <div class="form-group">
-                <label for="exerciseCount">Number of Exercises:</label>
+                <label for="exerciseCount">Number of Exercises</label>
                 <input type="number" id="exerciseCount" min="1" value="10">
             </div>
             <div class="form-group">
-                <label for="exerciseDuration">Exercise Duration (seconds):</label>
+                <label for="exerciseDuration">Exercise Duration (seconds)</label>
                 <input type="number" id="exerciseDuration" min="1" value="10">
             </div>
             <div class="form-group">
-                <label for="restDuration">Rest Duration (seconds):</label>
+                <label for="restDuration">Rest Duration (seconds)</label>
                 <input type="number" id="restDuration" min="1" value="5">
             </div>
-            <button onclick="startWorkout()">Start</button>
+            <button onclick="startWorkout()">Start Workout</button>
         </div>
     </div>
-
     <!-- Timer Page -->
     <div id="timer-page" class="page">
         <div class="container">
